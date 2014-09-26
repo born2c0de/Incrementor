@@ -1,16 +1,6 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 """
-Created on Jul 10, 2012 - https://github.com/eBookArchitects/Incrementor
-Modified on Sep [[[[[insert date]]]]], 2014 - [[[[[[[[[Insert github URL]]]]]]]]]
-
-A Sublime Text 3 Plugin that can generate a sequence of numbers using search and replace.
-
-License:
-Creative Commons Attribution 2.0 Generic
-http://creativecommons.org/licenses/by/2.0/
-"""
-"""
 Incrementor for Sublime Text 3
 Created on 25-Sep-2014 by Sanchit Karve
 A Sublime Text 3 Plugin that can generate a sequence of numbers and letters using search and replace.
