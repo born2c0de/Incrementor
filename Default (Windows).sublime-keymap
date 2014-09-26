@@ -1,0 +1,3 @@
+[
+    { "keys": ["ctrl+alt+shift+h"], "command": "incrementor_prompt"}
+]
