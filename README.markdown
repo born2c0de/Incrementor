@@ -3,6 +3,8 @@
 A Sublime Text 3 (ST3) Plugin that can generate a sequence of numbers and alphabets using search and replace.
 Ported to ST3 by Sanchit Karve from [original Incrementor implementation for ST2](https://github.com/eBookArchitects/Incrementor) by eBookArchitects.
 
+[Example Image][img1]
+
 Example (Before):
 
     10. Bob
@@ -95,3 +97,5 @@ TODO
 ## License
 
 [Creative Commons Attribution 2.0 Generic](http://creativecommons.org/licenses/by/2.0/)
+
+[img1]: http://i.imgur.com/Rfqz1nB.gif
