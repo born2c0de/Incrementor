@@ -28,7 +28,10 @@ class IncrementorCommand(sublime_plugin.TextCommand):
             region = self.view.find(regex, position)
             if region:
                 yield region
-                position = region.end() - 1
+                if region.size() > 1:
+                    position = region.end() - 1
+                else:
+                    position = region.end()
             else:
                 break
 
@@ -40,7 +43,7 @@ class IncrementorCommand(sublime_plugin.TextCommand):
         while True:
             yield num
             # No validation here. Use carefully.
-            num = chr( ord(num) + step )
+            num = chr(ord(num) + step)
             # return to start value if we're past repeat_after
             if repeat_after:
                 if step < 0:
@@ -58,7 +61,7 @@ class IncrementorCommand(sublime_plugin.TextCommand):
         while True:
             yield num
             num = num + step
-            if repeat_after:# return to start value if we're past repeat_after
+            if repeat_after:  # return to start value if we're past repeat_after
                 if step < 0:
                     if num < repeat_after:
                         num = start
@@ -84,9 +87,9 @@ class IncrementorCommand(sublime_plugin.TextCommand):
             if replace_list[i] == '\\i':
                 replace_list[i] = self.make_step()
             elif replace_list[i] == '\\a':
-                replace_list[i] = self.make_alpha_step(start='a',repeat_after='z')
+                replace_list[i] = self.make_alpha_step(start='a', repeat_after='z')
             elif replace_list[i] == '\\A':
-                replace_list[i] = self.make_alpha_step(start='A',repeat_after='Z')
+                replace_list[i] = self.make_alpha_step(start='A', repeat_after='Z')
             elif re.match(r'^\\[i]\(.+?\)$', replace_list[i]):
                 arg_list = [int(num) for num in re.split(r'\\i|\(|,| |\)', replace_list[i]) if num != '']
                 if len(arg_list) == 3:
@@ -181,9 +184,10 @@ class IncrementorHighlight:
                         if sRegion.contains(mRegion):
                             positiveMatch.append(mRegion)
 
-            view.add_regions('Incrementor',positiveMatch,'comment','',sublime.DRAW_OUTLINED)
+            view.add_regions('Incrementor', positiveMatch, 'comment', '', sublime.DRAW_OUTLINED)
         else:
             view.erase_regions('Incrementor')
+
 
 class IncrementorPromptCommand(sublime_plugin.WindowCommand):
     """Prompts for find and replace strings."""
@@ -196,19 +200,19 @@ class IncrementorPromptCommand(sublime_plugin.WindowCommand):
             highlighter.run()
 
     def show_find_panel(self):
-        self.window.show_input_panel('Find (w/ RegEx) :','',on_done=self.find_callback_on_done,on_change=self.highlighter,on_cancel=self.highlighter)
+        self.window.show_input_panel('Find (w/ RegEx) :', '', on_done=self.find_callback_on_done, on_change=self.highlighter, on_cancel=self.highlighter)
 
     def find_callback_on_done(self, find):
         self.regex_to_find = find
         self.show_replace_panel()
 
     def show_replace_panel(self):
-        self.window.show_input_panel('Replace (w/o RegEx) :','',on_done=self.replace_callback_on_done,on_cancel=self.highlighter,on_change=None)
+        self.window.show_input_panel('Replace (w/o RegEx) :', '', on_done=self.replace_callback_on_done, on_cancel=self.highlighter, on_change=None)
 
     def replace_callback_on_done(self, replace):
         self.replace_matches_with = replace
         # Call IncrementorCommand to actually make the replacements
-        self.window.active_view().run_command('incrementor',{'regex_to_find':self.regex_to_find,'replace_matches_with':self.replace_matches_with})
+        self.window.active_view().run_command('incrementor', {'regex_to_find': self.regex_to_find, 'replace_matches_with': self.replace_matches_with})
 
     def run(self):
         """"""
