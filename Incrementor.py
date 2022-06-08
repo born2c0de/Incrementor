@@ -7,6 +7,7 @@ A Sublime Text 3 Plugin that can generate a sequence of numbers and letters usin
 
 Ported to ST3 from Incrementor for ST2 created on 10-Jul-2012 by eBookArchitects
 https://github.com/eBookArchitects/Incrementor
+@python-ver: Python 3.3
 """
 import sublime
 import sublime_plugin
